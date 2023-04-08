@@ -1,5 +1,7 @@
 # todo-BE
 
+[![CI with Gradle](https://github.com/dipankr/todo-BE/actions/workflows/gradle.yml/badge.svg?branch=main)](https://github.com/dipankr/todo-BE/actions/workflows/gradle.yml)
+
 Backed APIs for todo list 
 
 ### **[getTodoList](src/main/java/com/todolist/todo/controller/TodoListController.java)** response:
