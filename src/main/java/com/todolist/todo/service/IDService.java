@@ -21,7 +21,7 @@ public class IDService {
         return idService;
     }
 
-    public Integer getID(){
+    public Integer getID() {
         return idService.ID.addAndGet(1);
     }
 }

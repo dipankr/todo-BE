@@ -13,7 +13,7 @@ public class User {
     private String password;
     private List<Todo> todoList;
 
-    public User(String username, String password){
+    public User(String username, String password) {
         this.id = String.valueOf(IDService.getInstance().getID());
         this.username = username;
         this.password = password;

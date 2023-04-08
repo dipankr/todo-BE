@@ -12,7 +12,7 @@ public class Todo {
     private String description;
     private Boolean completed;
 
-    public Todo(String title, String description){
+    public Todo(String title, String description) {
         this.id = String.valueOf(IDService.getInstance().getID());
         this.title = title;
         this.description = description;

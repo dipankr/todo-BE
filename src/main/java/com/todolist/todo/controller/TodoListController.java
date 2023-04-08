@@ -32,11 +32,11 @@ public class TodoListController {
 
         } catch (Exception e) {
             log.error("error parsing post body", e);
-            return new ResponseEntity<>("{error: error parsing request body}," + todo,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("{\"error\": \"error parsing request body\"}," + todo, HttpStatus.BAD_REQUEST);
         }
 
-        if(null == tempTodo || null == tempTodo.getTitle() || 0 == tempTodo.getTitle().length()){
-            return new ResponseEntity<>("{\"error\": \"title can not be empty\"}",HttpStatus.BAD_REQUEST);
+        if (null == tempTodo || null == tempTodo.getTitle() || 0 == tempTodo.getTitle().length()) {
+            return new ResponseEntity<>("{\"error\": \"title can not be empty\"}, + todo", HttpStatus.BAD_REQUEST);
         }
 
         todoList.add(new Todo(tempTodo.getTitle(), tempTodo.getDescription()));

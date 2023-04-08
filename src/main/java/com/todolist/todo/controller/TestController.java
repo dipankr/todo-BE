@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestController {
     @GetMapping("/")
-    public ResponseEntity<String> testRootEndpoint(){
+    public ResponseEntity<String> testRootEndpoint() {
         return new ResponseEntity<>("Todo API is running.", HttpStatus.OK);
     }
 
     @GetMapping("/test")
-    public ResponseEntity<String> testApiEndpoint(){
+    public ResponseEntity<String> testApiEndpoint() {
         return new ResponseEntity<>("Todo API is running..", HttpStatus.OK);
     }
 }
