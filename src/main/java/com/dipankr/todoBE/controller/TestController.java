@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
     @GetMapping("/")
     public ResponseEntity<String> testRootEndpoint() {
-        return new ResponseEntity<>("Todo API is running.", HttpStatus.OK);
+        return new ResponseEntity<>("Todo API is running. Successfully access to root path!", HttpStatus.OK);
     }
 
     @GetMapping("/test")
