@@ -62,7 +62,7 @@ Backed APIs for todo list
   }
 ```
 
-### **[getTodoList](src/main/java/com/todolist/todo/controller/TodoListController.java)** response
+### **[getTodoList](src/main/java/com/dipankr/todoBE/controller/TodoListController.java)** response
 
 ---
 
@@ -79,7 +79,7 @@ Backed APIs for todo list
     "completed": false
 }]
 ```
-### **[addTodo](src/main/java/com/todolist/todo/controller/TodoListController.java)** request
+### **[addTodo](src/main/java/com/dipankr/todoBE/controller/TodoListController.java)** request
 
 ---
 

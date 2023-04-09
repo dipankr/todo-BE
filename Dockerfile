@@ -1,7 +1,5 @@
-FROM openjdk:19-slim-buster
-VOLUME /tmp
-ARG JAR_FILE
+FROM openjdk:20-slim-buster
+EXPOSE 8080
 
-
-COPY $JAR_FILE app.jar
+COPY target/*.jar app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
