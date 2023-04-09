@@ -1,4 +1,4 @@
-package com.todolist.todo.entity;
+package com.dipankr.todoBE.entity;
 
 import com.google.gson.Gson;
 import org.junit.jupiter.api.Test;

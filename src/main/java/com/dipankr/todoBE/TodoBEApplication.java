@@ -1,13 +1,13 @@
-package com.todolist.todo;
+package com.dipankr.todoBE;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TodoApplication {
+public class TodoBEApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(TodoApplication.class, args);
+        SpringApplication.run(TodoBEApplication.class, args);
         System.out.println("TodoList application started successfully...");
     }
 

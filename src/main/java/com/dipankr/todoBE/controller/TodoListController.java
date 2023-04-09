@@ -1,8 +1,8 @@
-package com.todolist.todo.controller;
+package com.dipankr.todoBE.controller;
 
+import com.dipankr.todoBE.entity.Todo;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.todolist.todo.entity.Todo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

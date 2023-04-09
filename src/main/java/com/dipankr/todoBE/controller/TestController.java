@@ -1,4 +1,4 @@
-package com.todolist.todo.controller;
+package com.dipankr.todoBE.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

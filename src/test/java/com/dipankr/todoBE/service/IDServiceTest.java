@@ -1,4 +1,4 @@
-package com.todolist.todo.service;
+package com.dipankr.todoBE.service;
 
 import org.junit.jupiter.api.Test;
 

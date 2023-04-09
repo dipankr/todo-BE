@@ -1,6 +1,6 @@
-package com.todolist.todo.entity;
+package com.dipankr.todoBE.entity;
 
-import com.todolist.todo.service.IDService;
+import com.dipankr.todoBE.service.IDService;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Built-By: dipankr
+Build-Jdk: 19.0.2
+Created-By: start.spring.io
+Main-Class: com.dipankr.todoBE.TodoBEApplication
