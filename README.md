@@ -1,6 +1,6 @@
 # todo-BE
 
-[![CI with Gradle](https://github.com/dipankr/todo-BE/actions/workflows/gradle.yml/badge.svg?branch=main)](https://github.com/dipankr/todo-BE/actions/workflows/gradle.yml)
+[![CI - TodoBE](https://github.com/dipankr/todo-BE/actions/workflows/maven.yml/badge.svg)](https://github.com/dipankr/todo-BE/actions/workflows/maven.yml)
 
 Backed APIs for todo list 
 
