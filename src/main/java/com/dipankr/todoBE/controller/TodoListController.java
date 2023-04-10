@@ -16,12 +16,14 @@ import java.util.ArrayList;
 public class TodoListController {
     ArrayList<Todo> todoList = new ArrayList<>();
 
+    @CrossOrigin (origins = {})
     @GetMapping(path = "/api/todolist", produces = "application/json")
     @ResponseBody
     public String getTodoList() {
         return new Gson().toJson(todoList);
     }
 
+    @CrossOrigin (origins = {})
     @PostMapping(path = "/api/todolist", produces = "application/json")
     public ResponseEntity<?> addTodo(@RequestBody String todo) {
         Todo tempTodo;
