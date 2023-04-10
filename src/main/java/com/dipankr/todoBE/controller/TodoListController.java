@@ -20,7 +20,7 @@ public class TodoListController {
     @GetMapping(path = "/api/todolist", produces = "application/json")
     @ResponseBody
     public String getTodoList() {
-        return new Gson().toJson(todoList);
+        return getResponseJson(new Gson().toJson(todoList), null, "success");
     }
 
     @CrossOrigin (origins = {})
@@ -34,15 +34,36 @@ public class TodoListController {
 
         } catch (Exception e) {
             log.error("error parsing post body", e);
-            return new ResponseEntity<>("{\"error\": \"error parsing request body\"}," + todo, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(getResponseJson(null, true, "error parsing request body"), HttpStatus.BAD_REQUEST);
         }
 
         if (null == tempTodo || null == tempTodo.getTitle() || 0 == tempTodo.getTitle().length()) {
-            return new ResponseEntity<>("{\"error\": \"title can not be empty\"}, + todo", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(getResponseJson(null, true, "title can not be empty"), HttpStatus.BAD_REQUEST);
         }
 
         todoList.add(new Todo(tempTodo.getTitle(), tempTodo.getDescription()));
 
-        return new ResponseEntity<>("added todo item to the list", HttpStatus.OK);
+        return new ResponseEntity<>(getResponseJson(null, null, "added todo item to the list"), HttpStatus.OK);
+    }
+
+    private String getResponseJson(String data, Boolean error, String message) {
+        StringBuilder sb = new StringBuilder().append("{")
+                .append("\"response\": ").append("{");
+
+        if (data != null && !data.isEmpty()) {
+            sb.append("\"data\":").append(data).append(",");
+        }
+
+        if (error != null) {
+            sb.append("\"error\":").append(error).append(",");
+        }
+
+        sb.append("\"message\":");
+        if (message != null && !message.isEmpty()) {
+            sb.append("\"").append(message).append("\"");
+        } else sb.append("\"\"");
+
+        sb.append("}}");
+        return sb.toString();
     }
 }
