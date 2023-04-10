@@ -1,8 +1,10 @@
 # todo-BE
 
 [![CI - TodoBE](https://github.com/dipankr/todo-BE/actions/workflows/maven.yml/badge.svg)](https://github.com/dipankr/todo-BE/actions/workflows/maven.yml)
+[![API test](https://github.com/dipankr/todo-BE/actions/workflows/postmanCLI.yml/badge.svg)](https://github.com/dipankr/todo-BE/actions/workflows/postmanCLI.yml)
 
-Backed APIs for todo list 
+Backed APIs for todo list </br>
+Fronted project : [Todo-FE](https://github.com/dipankr/todo-FE)
 
 ### Endpoints
 
@@ -14,11 +16,19 @@ Backed APIs for todo list
     "test endpoints": [
       {
         "GET": "/",
-        "response": "Todo API is running."
+        "res": {
+          "response": {
+            "message":"Todo API is up and running."
+          }
+        }
       },
       {
         "GET": "/test",
-        "response": "Todo API is running.."
+        "res": {
+          "response": {
+            "message": "/test is accessible.."
+          }
+        }
       }
     ]
   }
@@ -31,30 +41,44 @@ Backed APIs for todo list
     "todolist endpoints": [
       {
         "GET": "/api/todolist",
-        "response": [
-          {
-            "id": "1001",
-            "title": "title 1",
-            "description": "description 1",
-            "completed": false
-          },
-          {
-            "id": "1002",
-            "title": "title 2",
-            "description": "description 2",
-            "completed": false
+        "res": {
+          "response": {
+            "data": [
+              {
+                "id": "1001",
+                "title": "title 1",
+                "description": "description 1",
+                "completed": false
+              },
+              {
+                "id": "1002",
+                "title": "title postman 1",
+                "description": "description postman 1",
+                "completed": false
+              }
+            ],
+            "message": "success"
           }
-        ]
+        }
       },
       {
         "POST": "/api/todolist",
-        "response" :
+        "res" :
         [
           {
-            "success" : "added todo item to the list"
+            "success" : {
+              "response": {
+                "message": "added todo item to the list"
+              }
+            }
           },
           {
-            "failed" : "{error: error parsing request body}"
+            "failed" : {
+              "response": {
+                "error": true,
+                "message": "title can not be empty"
+              }
+            }
           }
         ]
       }
@@ -62,31 +86,4 @@ Backed APIs for todo list
   }
 ```
 
-### **[getTodoList](src/main/java/com/dipankr/todoBE/controller/TodoListController.java)** response
-
----
-
-```json
-[{
-    "id": "1001",
-    "title": "title postman 1",
-    "description": "description postman 1",
-    "completed": false
-    },
-    {
-    "id": "1002",
-    "title": "title postman 2",
-    "completed": false
-}]
-```
-### **[addTodo](src/main/java/com/dipankr/todoBE/controller/TodoListController.java)** request
-
----
-
-```json
-{
-    "title": "title postman 1",
-    "description": "description postman 1"
-}
-```
 
