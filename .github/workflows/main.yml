@@ -1,0 +1,19 @@
+on:
+  pull_request:
+    branches: [ "main" ]
+    
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Request review
+      # You may pin to the exact commit or the version.
+      # uses: murs313/request-review@fb50780dbb30612d1ec19b62e4cfc5a7805855cf
+      uses: murs313/request-review@v1.0
+      with:
+        # GitHub token
+        token: ${{ secrets.GITHUB_TOKEN }}
+        # Reviewers to add, in space separated list
+        reviewers: dipankr
