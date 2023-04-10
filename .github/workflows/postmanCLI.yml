@@ -1,4 +1,4 @@
-name: Automated API tests using Postman CLI
+name: API test - Postman
 
 on:
   push:
