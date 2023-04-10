@@ -6,17 +6,19 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static com.dipankr.todoBE.service.ResponseService.getResponseJson;
+
 @RestController
 public class TestController {
-    @CrossOrigin(origins = {})
+    @CrossOrigin
     @GetMapping("/")
     public ResponseEntity<String> testRootEndpoint() {
-        return new ResponseEntity<>("Todo API is running. Successfully access to root path!", HttpStatus.OK);
+        return new ResponseEntity<>(getResponseJson(null, null, "Todo API is up and running."), HttpStatus.OK);
     }
 
-    @CrossOrigin (origins = {})
+    @CrossOrigin
     @GetMapping("/test")
     public ResponseEntity<String> testApiEndpoint() {
-        return new ResponseEntity<>("Todo API is running..", HttpStatus.OK);
+        return new ResponseEntity<>(getResponseJson(null, null, "/test is accessible.."), HttpStatus.OK);
     }
 }

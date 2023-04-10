@@ -11,19 +11,21 @@ import org.springframework.web.bind.annotation.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+import static com.dipankr.todoBE.service.ResponseService.getResponseJson;
+
 @RestController
 @Slf4j
 public class TodoListController {
     ArrayList<Todo> todoList = new ArrayList<>();
 
-    @CrossOrigin (origins = {})
+    @CrossOrigin
     @GetMapping(path = "/api/todolist", produces = "application/json")
     @ResponseBody
     public String getTodoList() {
         return getResponseJson(new Gson().toJson(todoList), null, "success");
     }
 
-    @CrossOrigin (origins = {})
+    @CrossOrigin
     @PostMapping(path = "/api/todolist", produces = "application/json")
     public ResponseEntity<?> addTodo(@RequestBody String todo) {
         Todo tempTodo;
@@ -44,26 +46,5 @@ public class TodoListController {
         todoList.add(new Todo(tempTodo.getTitle(), tempTodo.getDescription()));
 
         return new ResponseEntity<>(getResponseJson(null, null, "added todo item to the list"), HttpStatus.OK);
-    }
-
-    private String getResponseJson(String data, Boolean error, String message) {
-        StringBuilder sb = new StringBuilder().append("{")
-                .append("\"response\": ").append("{");
-
-        if (data != null && !data.isEmpty()) {
-            sb.append("\"data\":").append(data).append(",");
-        }
-
-        if (error != null) {
-            sb.append("\"error\":").append(error).append(",");
-        }
-
-        sb.append("\"message\":");
-        if (message != null && !message.isEmpty()) {
-            sb.append("\"").append(message).append("\"");
-        } else sb.append("\"\"");
-
-        sb.append("}}");
-        return sb.toString();
     }
 }
