@@ -4,7 +4,7 @@
 [![API test](https://github.com/dipankr/todo-BE/actions/workflows/postmanCLI.yml/badge.svg)](https://github.com/dipankr/todo-BE/actions/workflows/postmanCLI.yml)
 
 Backed APIs for todo list </br>
-Fronted project : [Todo-FE](https://github.com/dipankr/todo-FE)
+Fronted project : [Todo-FE](https://github.com/dipankr/todo-FE) [🌐](https://dipankr.github.io/todo-FE/)
 
 ### Endpoints
 
