@@ -19,6 +19,6 @@ public class TestController {
     @CrossOrigin
     @GetMapping(value = "/test", produces = "application/json")
     public ResponseEntity<String> testApiEndpoint() {
-        return new ResponseEntity<>(getResponseJson(null, null, "/test is accessible.."), HttpStatus.OK);
+        return new ResponseEntity<>(getResponseJson(null, null, "/test is responsive.."), HttpStatus.OK);
     }
 }
