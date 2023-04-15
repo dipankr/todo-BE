@@ -1,4 +1,4 @@
-package com.dipankr.todoBE.service;
+package com.dipankr.todobe.service;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

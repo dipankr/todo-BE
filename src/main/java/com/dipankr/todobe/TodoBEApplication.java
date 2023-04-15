@@ -1,4 +1,4 @@
-package com.dipankr.todoBE;
+package com.dipankr.todobe;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

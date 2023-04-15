@@ -1,6 +1,6 @@
-package com.dipankr.todoBE.entity;
+package com.dipankr.todobe.entity;
 
-import com.dipankr.todoBE.service.IDService;
+import com.dipankr.todobe.service.IDService;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;

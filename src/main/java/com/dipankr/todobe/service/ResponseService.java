@@ -1,4 +1,4 @@
-package com.dipankr.todoBE.service;
+package com.dipankr.todobe.service;
 
 public class ResponseService {
     public static String getResponseJson(String data, Boolean error, String message) {

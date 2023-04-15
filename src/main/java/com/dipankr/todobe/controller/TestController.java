@@ -1,4 +1,4 @@
-package com.dipankr.todoBE.controller;
+package com.dipankr.todobe.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static com.dipankr.todoBE.service.ResponseService.getResponseJson;
+import static com.dipankr.todobe.service.ResponseService.getResponseJson;
 
 @RestController
 public class TestController {

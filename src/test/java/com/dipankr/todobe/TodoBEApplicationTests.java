@@ -1,4 +1,4 @@
-package com.dipankr.todoBE;
+package com.dipankr.todobe;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
