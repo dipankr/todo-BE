@@ -54,7 +54,7 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
-					<mainClass>com.dipankr.todoBE.TodoBEApplication</mainClass>
+					<mainClass>com.dipankr.todobe.TodoBEApplication</mainClass>
 				</configuration>
 			</plugin>
 		</plugins>

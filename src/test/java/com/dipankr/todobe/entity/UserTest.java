@@ -1,4 +1,4 @@
-package com.dipankr.todoBE.entity;
+package com.dipankr.todobe.entity;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
