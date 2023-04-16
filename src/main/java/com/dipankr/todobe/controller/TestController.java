@@ -12,13 +12,13 @@ import static com.dipankr.todobe.service.ResponseService.getResponseJson;
 public class TestController {
     @CrossOrigin
     @GetMapping(value = "/", produces = "application/json")
-    public ResponseEntity<String> testRootEndpoint() {
-        return new ResponseEntity<>(getResponseJson(null, null, "Todo API is up and running."), HttpStatus.OK);
+    public ResponseEntity<?> testRootEndpoint() {
+        return getResponseJson(null, null, "Todo API is up and running.", HttpStatus.OK);
     }
 
     @CrossOrigin
     @GetMapping(value = "/test", produces = "application/json")
-    public ResponseEntity<String> testApiEndpoint() {
-        return new ResponseEntity<>(getResponseJson(null, null, "/test is responsive.."), HttpStatus.OK);
+    public ResponseEntity<?> testApiEndpoint() {
+        return getResponseJson(null, null, "/test is responsive..", HttpStatus.OK);
     }
 }
