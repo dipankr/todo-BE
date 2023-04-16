@@ -34,9 +34,6 @@ public class TodoListService {
                 if (tempTodo.getTitle() != null && !tempTodo.getTitle().isEmpty()) {
                     todo.setTitle(tempTodo.getTitle());
                 }
-                if (tempTodo.getDescription() != null && !tempTodo.getDescription().isEmpty()) {
-                    todo.setDescription(tempTodo.getDescription());
-                }
                 if (tempTodo.getCompleted() != null) {
                     todo.setCompleted(tempTodo.getCompleted());
                 }
