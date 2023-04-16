@@ -48,7 +48,7 @@ public class TodoListController {
 
         todoList.add(new Todo(tempTodo.getTitle(), tempTodo.getDescription()));
 
-        return getResponseJson(new Gson().toJson(todoList), null, "success", HttpStatus.OK);
+        return getResponseJson(new Gson().toJson(todoList), null, "added todo item to the list", HttpStatus.OK);
     }
 
     @CrossOrigin
