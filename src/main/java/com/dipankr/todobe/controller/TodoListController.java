@@ -24,8 +24,8 @@ public class TodoListController {
     @CrossOrigin
     @GetMapping(path = "/api/todolist", produces = "application/json")
     @ResponseBody
-    public String getTodoList() {
-        return getResponseJson(new Gson().toJson(todoList), null, "success");
+    public ResponseEntity<?> getTodoList() {
+        return getResponseJson(new Gson().toJson(todoList), null, "success", HttpStatus.OK);
     }
 
     @CrossOrigin
@@ -39,16 +39,16 @@ public class TodoListController {
 
         } catch (Exception e) {
             log.error("error parsing post body", e);
-            return new ResponseEntity<>(getResponseJson(null, true, "error parsing request body"), HttpStatus.BAD_REQUEST);
+            return getResponseJson(null, true, "error parsing request body", HttpStatus.BAD_REQUEST);
         }
 
         if (null == tempTodo || null == tempTodo.getTitle() || 0 == tempTodo.getTitle().length()) {
-            return new ResponseEntity<>(getResponseJson(null, true, "title can not be empty"), HttpStatus.BAD_REQUEST);
+            return getResponseJson(null, true, "title can not be empty", HttpStatus.BAD_REQUEST);
         }
 
         todoList.add(new Todo(tempTodo.getTitle(), tempTodo.getDescription()));
 
-        return new ResponseEntity<>(getResponseJson(new Gson().toJson(todoList), null, "success"), HttpStatus.OK);
+        return getResponseJson(new Gson().toJson(todoList), null, "added todo item to the list", HttpStatus.OK);
     }
 
     @CrossOrigin
@@ -57,9 +57,9 @@ public class TodoListController {
         boolean success = TodoListService.deleteTodoById(todoList, todoId);
 
         if (success) {
-            return new ResponseEntity<>(getResponseJson(null, null, "deleted todo item from the list"), HttpStatus.OK);
+            return getResponseJson(null, null, "deleted todo item from the list", HttpStatus.OK);
         }
-        return new ResponseEntity<>(getResponseJson(null, true, "could not delete item"), HttpStatus.NOT_FOUND);
+        return getResponseJson(null, true, "could not delete item", HttpStatus.NOT_FOUND);
     }
 
     @CrossOrigin
@@ -73,15 +73,15 @@ public class TodoListController {
 
         } catch (Exception e) {
             log.error("error parsing post body", e);
-            return new ResponseEntity<>(getResponseJson(null, true, "error parsing request body"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(getResponseJson(null, true, "error parsing request body", HttpStatus.OK), HttpStatus.BAD_REQUEST);
         }
 
         boolean success = TodoListService.updateTodoById(todoList, tempTodo.getId(), tempTodo);
 
         if (success) {
-            return new ResponseEntity<>(getResponseJson(new Gson().toJson(todoList), null, "updated todo item in the list"), HttpStatus.OK);
+            return new ResponseEntity<>(getResponseJson(new Gson().toJson(todoList), null, "updated todo item in the list", HttpStatus.OK), HttpStatus.OK);
         }
-        return new ResponseEntity<>(getResponseJson(null, true, "could not update item"), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(getResponseJson(null, true, "could not update item", HttpStatus.OK), HttpStatus.NOT_FOUND);
     }
 
     @CrossOrigin
@@ -89,7 +89,7 @@ public class TodoListController {
     public ResponseEntity<?> deleteCompletedTodo() {
         TodoListService.deleteCompletedTodo(todoList);
 
-        return new ResponseEntity<>(getResponseJson(new Gson().toJson(todoList), null, "deleted completed todo item from the list"), HttpStatus.OK);
+        return getResponseJson(new Gson().toJson(todoList), null, "deleted completed todo item from the list", HttpStatus.OK);
 
     }
 }

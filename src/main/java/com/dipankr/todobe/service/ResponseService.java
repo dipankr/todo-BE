@@ -1,7 +1,10 @@
 package com.dipankr.todobe.service;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
 public class ResponseService {
-    public static String getResponseJson(String data, Boolean error, String message) {
+    public static ResponseEntity<?> getResponseJson(String data, Boolean error, String message, HttpStatus httpStatus) {
         StringBuilder sb = new StringBuilder().append("{")
                 .append("\"response\": ").append("{");
 
@@ -17,8 +20,10 @@ public class ResponseService {
         if (message != null && !message.isEmpty()) {
             sb.append("\"").append(message).append("\"");
         } else sb.append("\"\"");
+        sb.append(",");
 
+        sb.append("\"code\": ").append(httpStatus.value());
         sb.append("}}");
-        return sb.toString();
+        return new ResponseEntity<>(sb.toString(), httpStatus);
     }
 }
