@@ -1,50 +1,40 @@
 package com.dipankr.todobe.service;
 
 import com.dipankr.todobe.entity.Todo;
-import java.util.ArrayList;
+import com.dipankr.todobe.repository.ITodoRepository;
+import jakarta.transaction.Transactional;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
+@Transactional
 public class TodoListService {
 
-    public static boolean deleteTodoById(List<Todo> todoList, String id) {
-        if (todoList == null) {
-            return false;
-        }
+    private final ITodoRepository todoRepository;
 
-        for (Todo todo : todoList) {
-            if (todo.getId().equals(id)) {
-                todoList.remove(todo);
-                return true;
-            }
-        }
-
-        return false;
+    @Autowired
+    public TodoListService(ITodoRepository todoRepository) {
+        this.todoRepository = todoRepository;
     }
 
-    public static boolean updateTodoById(ArrayList<Todo> todoList, String todoId, Todo tempTodo) {
-        if (todoList == null) {
-            return false;
-        }
-        if (tempTodo == null) {
-            return false;
-        }
-
-        for (Todo todo : todoList) {
-            if (todo.getId().equals(todoId)) {
-                if (tempTodo.getTitle() != null && !tempTodo.getTitle().isEmpty()) {
-                    todo.setTitle(tempTodo.getTitle());
-                }
-                if (tempTodo.getCompleted() != null) {
-                    todo.setCompleted(tempTodo.getCompleted());
-                }
-                return true;
-            }
-        }
-
-        return false;
+    public List<Todo> getAllTodo() {
+        return todoRepository.findAll();
     }
 
-    public static void deleteCompletedTodo(ArrayList<Todo> todoList) {
-        todoList.removeIf(Todo::getCompleted);
+    public void addTodo(Todo newTodo) {
+        todoRepository.save(newTodo);
+    }
+
+    public void deleteTodoById(String id) {
+        todoRepository.deleteById(id);
+    }
+
+    public void updateTodoById(Todo tempTodo) {
+        todoRepository.save(tempTodo);
+    }
+
+    public void deleteCompletedTodo() {
+        todoRepository.deleteCompleted();
     }
 }

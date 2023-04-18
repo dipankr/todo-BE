@@ -1,21 +1,29 @@
 package com.dipankr.todobe.entity;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @EqualsAndHashCode
 @AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "todolist")
 public class Todo {
-    private String id;
-    private String title;
-    private Boolean completed;
 
-    public boolean equalsValue(Todo todo){
-        return this.title.equals(todo.getTitle()) &&
-                this.completed.equals(todo.getCompleted());
-    }
+    @Id
+    private String id;
+    @Column(name = "title")
+    private String title;
+    @Column(name = "completed")
+    private Boolean completed = false;
+
 }

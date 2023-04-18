@@ -10,6 +10,7 @@ RUN mvn clean package -DskipTests
 #
 FROM openjdk:20-slim-buster
 COPY --from=build /target/*.jar app.jar
+COPY --from=build /application-prod.properties application-prod.properties
 # ENV PORT=8080
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","app.jar"]
+ENTRYPOINT ["java","-Dspring.profiles.active=prod","-jar","app.jar"]

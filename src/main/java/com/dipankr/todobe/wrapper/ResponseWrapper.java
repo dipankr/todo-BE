@@ -1,12 +1,13 @@
-package com.dipankr.todobe.service;
+package com.dipankr.todobe.wrapper;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-public class ResponseService {
+public class ResponseWrapper {
+
     public static ResponseEntity<?> getResponseJson(String data, Boolean error, String message, HttpStatus httpStatus) {
         StringBuilder sb = new StringBuilder().append("{")
-                .append("\"response\": ").append("{");
+            .append("\"response\": ").append("{");
 
         if (data != null && !data.isEmpty()) {
             sb.append("\"data\":").append(data).append(",");
