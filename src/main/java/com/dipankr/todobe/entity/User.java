@@ -2,11 +2,10 @@ package com.dipankr.todobe.entity;
 
 
 import com.dipankr.todobe.service.IDService;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-
 import java.util.ArrayList;
 import java.util.List;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 @Getter
 @EqualsAndHashCode
@@ -21,18 +20,5 @@ public class User {
         this.username = username;
         this.password = password;
         this.todoList = new ArrayList<>();
-    }
-
-    public boolean equalValues(User user) {
-        return this.username.equals(user.getUsername()) &&
-                this.password.equals(user.getPassword()) &&
-                isEqualValueTodoList(user.getTodoList());
-    }
-
-    public boolean isEqualValueTodoList(List<Todo> todoList1) {
-        for (int i = 0; i < todoList.size(); i++) {
-            if (!todoList.get(i).equalsValue(todoList1.get(i))) return false;
-        }
-        return true;
     }
 }
