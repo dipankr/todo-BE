@@ -1,9 +1,9 @@
 package com.dipankr.todobe.controller;
 
-import static com.dipankr.todobe.service.AsyncThreadService.async;
 import static com.dipankr.todobe.wrapper.ResponseWrapper.getResponseJson;
 
 import com.dipankr.todobe.entity.Todo;
+import com.dipankr.todobe.service.AsyncThreadService;
 import com.dipankr.todobe.service.TodoListService;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -21,30 +21,32 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin
 @RestController
 @Slf4j
+@RequestMapping("/api/todolist")
 public class TodoListController {
 
     private final List<Todo> todoList;
     private final TodoListService todoListService;
+    private final AsyncThreadService asyncThreadService;
 
     @Autowired
-    public TodoListController(TodoListService todoListService) {
+    public TodoListController(TodoListService todoListService, AsyncThreadService asyncThreadService) {
         todoList = todoListService.getAllTodo();
         this.todoListService = todoListService;
+        this.asyncThreadService = asyncThreadService;
     }
 
-    @GetMapping(path = "/api/todolist", produces = "application/json")
-    @ResponseBody
+    @GetMapping(produces = "application/json")
     public ResponseEntity<?> getTodoList() {
-        return getResponseJson(new Gson().toJson(todoList), null, "success", HttpStatus.OK);
+        return getResponseJson(todoList, null, "success", HttpStatus.OK);
     }
 
-    @PostMapping(path = "/api/todolist", produces = "application/json")
+    @PostMapping(produces = "application/json")
     public ResponseEntity<?> addTodo(@NonNull @RequestBody String todo) {
         Todo tempTodo;
         try {
@@ -54,34 +56,26 @@ public class TodoListController {
 
         } catch (Exception e) {
             log.error("error parsing post body", e);
-            return getResponseJson(new Gson().toJson(todoList), true, "error parsing request body", HttpStatus.BAD_REQUEST);
+            return getResponseJson(todoList, true, "error parsing request body", HttpStatus.BAD_REQUEST);
         }
 
         if (null == tempTodo) {
-            return getResponseJson(new Gson().toJson(todoList), true, "invalid data", HttpStatus.NOT_ACCEPTABLE);
+            return getResponseJson(todoList, true, "invalid data", HttpStatus.NOT_ACCEPTABLE);
         }
         if (null == tempTodo.getId()) {
-            return getResponseJson(new Gson().toJson(todoList), true, "ID not valid", HttpStatus.NOT_ACCEPTABLE);
+            return getResponseJson(todoList, true, "ID not valid", HttpStatus.NOT_ACCEPTABLE);
         }
         if (null == tempTodo.getTitle() || 0 == tempTodo.getTitle().length()) {
-            return getResponseJson(new Gson().toJson(todoList), true, "title can not be empty", HttpStatus.NOT_ACCEPTABLE);
+            return getResponseJson(todoList, true, "title can not be empty", HttpStatus.NOT_ACCEPTABLE);
         }
 
         todoList.add(tempTodo);
-        async(() -> todoListService.addTodo(tempTodo));
+        asyncThreadService.async(() -> todoListService.addTodo(tempTodo));
 
-        return getResponseJson(new Gson().toJson(todoList), null, "added todo item to the list", HttpStatus.OK);
+        return getResponseJson(todoList, null, "added todo item to the list", HttpStatus.OK);
     }
 
-    @DeleteMapping(path = "/api/todolist/{todoId}", produces = "application/json")
-    public ResponseEntity<?> deleteTodo(@PathVariable String todoId) {
-        todoList.removeIf(todo -> todo.getId().equals(todoId));
-        async(() -> todoListService.deleteTodoById(todoId));
-
-        return getResponseJson(new Gson().toJson(todoList), null, "deleted todo item from the list", HttpStatus.OK);
-    }
-
-    @PutMapping(path = "/api/todolist", produces = "application/json")
+    @PutMapping(produces = "application/json")
     public ResponseEntity<?> updateTodo(@NonNull @RequestBody String jsonTodo) {
         Todo tempTodo;
         Type type = new TypeToken<Todo>() {
@@ -94,17 +88,25 @@ public class TodoListController {
         }
 
         todoList.replaceAll(todo -> todo.getId().equals(tempTodo.getId()) ? tempTodo : todo);
-        async(() -> todoListService.updateTodoById(tempTodo));
+        asyncThreadService.async(() -> todoListService.updateTodoById(tempTodo));
 
-        return getResponseJson(new Gson().toJson(todoList), null, "updated todo item in the list", HttpStatus.OK);
+        return getResponseJson(todoList, null, "updated todo item in the list", HttpStatus.OK);
     }
 
-    @DeleteMapping(path = "/api/todolist", produces = "application/json")
+    @DeleteMapping(path = "/{todoId}", produces = "application/json")
+    public ResponseEntity<?> deleteTodo(@PathVariable String todoId) {
+        todoList.removeIf(todo -> todo.getId().equals(todoId));
+        asyncThreadService.async(() -> todoListService.deleteTodoById(todoId));
+
+        return getResponseJson(todoList, null, "deleted todo item from the list", HttpStatus.OK);
+    }
+
+    @DeleteMapping(produces = "application/json")
     public ResponseEntity<?> deleteCompletedTodo() {
         todoList.removeIf(Todo::getCompleted);
         todoListService.deleteCompletedTodo();
 
-        return getResponseJson(new Gson().toJson(todoList), null, "deleted completed todo item from the list", HttpStatus.OK);
+        return getResponseJson(todoList, null, "deleted completed todo item from the list", HttpStatus.OK);
 
     }
 }

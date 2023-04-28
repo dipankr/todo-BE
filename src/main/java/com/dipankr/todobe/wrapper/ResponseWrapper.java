@@ -1,30 +1,34 @@
 package com.dipankr.todobe.wrapper;
 
+import com.dipankr.todobe.entity.Todo;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+@Slf4j
 public class ResponseWrapper {
 
-    public static ResponseEntity<?> getResponseJson(String data, Boolean error, String message, HttpStatus httpStatus) {
-        StringBuilder sb = new StringBuilder().append("{")
-            .append("\"response\": ").append("{");
+    public static ResponseEntity<?> getResponseJson(List<Todo> data, Boolean error, String message, @NonNull HttpStatus httpStatus) {
+        return wrapResponse(data, error, message, httpStatus);
+    }
 
-        if (data != null && !data.isEmpty()) {
-            sb.append("\"data\":").append(data).append(",");
+    private static ResponseEntity<?> wrapResponse(List<Todo> data, Boolean error, String message, @NonNull HttpStatus httpStatus) {
+        Map<String, Object> body = new HashMap<>();
+        if (null != data) {
+            body.put("data", data);
         }
-
-        if (error != null) {
-            sb.append("\"error\":").append(error).append(",");
+        if (null != error) {
+            body.put("error", error);
         }
+        if (null != message) {
+            body.put("message", message);
+        }
+        body.put("code", httpStatus.value());
 
-        sb.append("\"message\":");
-        if (message != null && !message.isEmpty()) {
-            sb.append("\"").append(message).append("\"");
-        } else sb.append("\"\"");
-        sb.append(",");
-
-        sb.append("\"code\": ").append(httpStatus.value());
-        sb.append("}}");
-        return new ResponseEntity<>(sb.toString(), httpStatus);
+        return ResponseEntity.status(httpStatus).body(body);
     }
 }
