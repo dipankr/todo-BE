@@ -3,6 +3,7 @@ package com.dipankr.todobe.service;
 import com.dipankr.todobe.entity.Todo;
 import java.util.List;
 
+@Deprecated
 public interface TodoListService {
 
     /**
