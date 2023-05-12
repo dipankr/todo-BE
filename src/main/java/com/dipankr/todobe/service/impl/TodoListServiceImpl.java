@@ -1,7 +1,7 @@
 package com.dipankr.todobe.service.impl;
 
 import com.dipankr.todobe.entity.Todo;
-import com.dipankr.todobe.repository.ITodoRepository;
+import com.dipankr.todobe.repository.TodoRepository;
 import com.dipankr.todobe.service.TodoListService;
 import jakarta.transaction.Transactional;
 import java.util.List;
@@ -10,12 +10,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Transactional
+@Deprecated
 public class TodoListServiceImpl implements TodoListService {
 
-    private final ITodoRepository todoRepository;
+    private final TodoRepository todoRepository;
 
     @Autowired
-    public TodoListServiceImpl(ITodoRepository todoRepository) {
+    public TodoListServiceImpl(TodoRepository todoRepository) {
         this.todoRepository = todoRepository;
     }
 

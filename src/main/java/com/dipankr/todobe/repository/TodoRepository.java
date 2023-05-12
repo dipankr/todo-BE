@@ -7,7 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ITodoRepository extends JpaRepository<Todo, String> {
+@Deprecated
+public interface TodoRepository extends JpaRepository<Todo, String> {
 
     @Modifying
     @Query("delete from Todo td where td.completed = true")

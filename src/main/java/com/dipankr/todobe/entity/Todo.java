@@ -17,6 +17,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "todolist")
+@Deprecated
 public class Todo {
 
     @Id
