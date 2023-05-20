@@ -66,7 +66,7 @@ public class SecurityConfig {
     private String[] getWhitelist() {
         return new String[]{
             "/api/v1/auth/**",
-            "/api/todolist/**"
+            "/test/**"
         };
     }
 }
